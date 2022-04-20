@@ -36,12 +36,14 @@ void startSection(std::vector<std::vector<char>> map_import) {
         //std::cout << "\n";
     }
 
+    ///*
     for (int y = 0; y < map.size(); y++) {
         for (int x = 0; x < map[y].size(); x++) {
             std::cout << map[y][x]; //For Debug, checking if map is still intact.
         }
         std::cout << "\n";
     }
+    //*/
 }
 
 //
