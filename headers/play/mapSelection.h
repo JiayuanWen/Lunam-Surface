@@ -7,8 +7,20 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include "../outsideHeaders/dirent.h"
 #include "mapConvert.h"
+
+//If system is 32-bit or 64-bit Windows, dirent.h not included, so use a local one. 
+//Credit: tronkko (GitHub). Usable under MIT License.
+#ifdef _WIN32
+    #include "../../outsideHeaders/dirent.h"
+    #include <conio.h>
+#endif
+
+//If system is a Linux distro, dirent.h is included, so use directly. 
+#ifdef linux
+    #include <dirent.h>
+    #include <termios.h>
+#endif
 
 void mapSelect() {
 
@@ -42,8 +54,8 @@ void mapSelect() {
     std::cout << std::endl << "Select map: " << std::endl;
     std::cin >> playerChoice;
 
-    //Opening map file
-    if (playerChoice > mapCount-1 || playerChoice < 1) { // mapCount is +1 over the desired value, hence >= instead of > when comparing playerChoice with mapCount.
+    //Opening map file base on player choice
+    if (playerChoice > mapCount-1 || playerChoice < 1) { // mapCount is +1 over the desired value, so mapCount-1
         std::cout << "Map file does not exist." << std::endl;
         mapFile.close();
         return;
@@ -54,7 +66,7 @@ void mapSelect() {
         std::string formatString;
         std::getline(mapFile, formatString);
 
-        //Check map file format. All map files should begin with the string "LSMap" followed by one empty line
+        //Check map file format. All map files should begin with the string "LSMap"
         if (formatString == "LSMap") {
 
             //For debug use. Print string from map file to see if file is read successfully
