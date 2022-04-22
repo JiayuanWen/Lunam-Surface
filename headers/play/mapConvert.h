@@ -48,7 +48,9 @@ void mapToVector(std::ifstream& mapFile) {
     //*/
 
     //Pass 'map' to gameSession
-    startSection(map);
+    preSection(map);
+
+    return;
 }
 
 #endif

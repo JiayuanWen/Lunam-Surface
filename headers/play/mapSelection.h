@@ -17,7 +17,7 @@
 #endif
 
 //If system is a Linux distro, dirent.h is included, so use directly. 
-#ifdef linux
+#ifdef __linux__
     #include <dirent.h>
     #include <termios.h>
 #endif
@@ -89,6 +89,7 @@ void mapSelect() {
         }
     }
 
+    return;
 }
 
 #endif
