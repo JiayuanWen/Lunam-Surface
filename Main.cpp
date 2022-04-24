@@ -100,8 +100,6 @@ void mainMenu() {
             std::cout << "    |_______||_____|__| |__|  |___._|____|_____|  " << std::endl;
             std::cout << "                                                  " << std::endl;
             std::cout << "    XX~~~~~~~~XXXXXX~~XXXXXXXXXXXX~~~~~XXXXXXXXX  " << std::endl;
-            std::cout << "                                                  " << std::endl;
-            std::cout << "                                                  " << std::endl;
 
             if (option == 1) {
                 std::cout << "                                                  " << std::endl;
@@ -115,7 +113,7 @@ void mainMenu() {
                 std::cout << "                                                  " << std::endl;
                 std::cout << "                                                  " << std::endl;
                 std::cout << "                                                  " << std::endl;
-                std::cout << "('W' and 'S' to Choose. 'L' to Select)" << std::endl;
+                std::cout << "('W' and 'S' to Choose. 'L' to Select)";
             }
             else if (option == 2) {
                 std::cout << "                                                  " << std::endl;
@@ -129,7 +127,7 @@ void mainMenu() {
                 std::cout << "                                                  " << std::endl;
                 std::cout << "                                                  " << std::endl;
                 std::cout << "                                                  " << std::endl;
-                std::cout << "('W' and 'S' to Choose. 'L' to Select)" << std::endl;
+                std::cout << "('W' and 'S' to Choose. 'L' to Select)";
             }
             else if (option == 3) {
                 std::cout << "                                                  " << std::endl;
@@ -143,7 +141,7 @@ void mainMenu() {
                 std::cout << "                                                  " << std::endl;
                 std::cout << "                                                  " << std::endl;
                 std::cout << "                                                  " << std::endl;
-                std::cout << "('W' and 'S' to Choose. 'L' to Select)" << std::endl;
+                std::cout << "('W' and 'S' to Choose. 'L' to Select)";
             }
             else if (option == 4) {
                 std::cout << "                                                  " << std::endl;
@@ -157,7 +155,7 @@ void mainMenu() {
                 std::cout << "                                                  " << std::endl;
                 std::cout << "                                                  " << std::endl;
                 std::cout << "                                                  " << std::endl;
-                std::cout << "('W' and 'S' to Choose. 'L' to Select)" << std::endl;
+                std::cout << "('W' and 'S' to Choose. 'L' to Select)";
             }
             
 
@@ -196,6 +194,7 @@ void mainMenu() {
                         tcsetattr(STDIN_FILENO,TCSANOW,&old_tio_); //Reset terminal setting
                         std::cout << "\033[2J\033[1;1H" << std::endl; //Clear screen
                         session = false;
+                        backToMenu = false;
                     }
                     else {
                         std::cout << "\033[2J\033[1;1H" << std::endl; //Clear screen

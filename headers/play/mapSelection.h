@@ -7,6 +7,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <limits>
 #include "mapConvert.h"
 
 //If system is 32-bit or 64-bit Windows, dirent.h not included, so use a local one. 
@@ -152,13 +153,18 @@ void mapSelect() {
     //Player choose a map file
     int playerChoice = 0;
 
-    std::cout << std::endl << "Select map (Enter the map number, then press 'Enter'): " << std::endl;
+    std::cout << std::endl << "Select map (Enter the map number, then press 'Enter'): ";
     std::cin >> playerChoice;
 
     //Opening map file base on player choice
     if (playerChoice > mapCount-1 || playerChoice < 1) { // mapCount is +1 over the desired value, so mapCount-1
-        std::cout << "Map file does not exist." << std::endl;
+        std::cout << "Map file does not exist." << std::endl << std::endl << std::endl;
         mapFile.close();
+
+        std::cout << "(Press 'Enter' to go back to main menu)";
+        std::cin.get();
+        std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+
         return;
     }
     else {
@@ -186,6 +192,11 @@ void mapSelect() {
         else {
             std::cout << "Map file not supported." << std::endl;
             mapFile.close();
+
+            std::cout << "(Press 'Enter' to go back to main menu)";
+            std::cin.get();
+            std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+
             return;
         }
     }
