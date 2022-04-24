@@ -38,7 +38,7 @@
 
 //Map
 std::vector<std::vector<char>> map;
-std::vector<std::vector<char>> map_backup;
+std::vector<std::vector<char>> map_overlap;
 
 //Player
 int posX = 0; 
@@ -78,14 +78,14 @@ XX~XXX~XXXX~XXXXX~~~~~~~~~~~~~~~~~~~~~XXXXX~XXXXXX
 XX~XXX~XXXX~XXXXXXXXXXX~XXXXXXXXXXXXX~XXXXX~XXXXXX
 XXXXXX~XXXX~~~~~~~~XXXX~XXXXX~~~~~~~~~~~~~~~~~~XXX
 XXXXXX~XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  
-//Don't ask me why Y-axis is reversed, it's the nature of 2D array.
+//Don't ask me why Y-axis is inverted and map is accessed via map[y][x] instead of map[x][y], it's the nature of 2D array.
 */
 
 //Import map from mapConvert.h , then place player at starting point.
 void preSection(std::vector<std::vector<char>> map_import) {
     //Import map from mapConvert.h
     map = map_import;
-    map_backup = map_import;
+    map_overlap = map_import;
 
     //Find '^' in map, that is the starting point.
     for (int y = 0; y < map.size(); y++) {
@@ -95,6 +95,7 @@ void preSection(std::vector<std::vector<char>> map_import) {
                 posX = x;
                 posY = y;
                 map[y][x] = 'T';
+                //map_overlap[y][x] = 'X';
             }
         }
         //std::cout << "\n";
@@ -172,7 +173,16 @@ void gameSession() {
                     moveRIGHT();
                     break;
                 default:
-                    std::cout << "";
+                    break;
+            }
+
+            //Player reached base?
+            switch (map_overlap[posY][posX]) {
+                case '!':
+                    session = false;
+                    return;
+                default:
+                    break;
             }
         }
     #endif
@@ -190,45 +200,53 @@ void moveUP() {
     //Only proceed if player is inside map and next move not land on 'X'
     if (posY > 0 && map[posY-1][posX] != 'X') {
         //Remove player from old location. 
-        map[posY][posX] = map_backup[posY][posX]; 
+        map[posY][posX] = map_overlap[posY][posX]; 
         //Move player position up 1 unit
         posY--;
         //Place player to new location. 
         map[posY][posX] = 'T';
     }
+
+    return;
 }
 void moveDOWN() {
     //Only proceed if player is inside map and next move not land on 'X'
     if (posY < map.size()-1 && map[posY+1][posX] != 'X') {
         //Remove player from old location. 
-        map[posY][posX] = map_backup[posY][posX]; 
+        map[posY][posX] = map_overlap[posY][posX]; 
         //Move player position down 1 unit
         posY++;
         //Place player to new location. 
         map[posY][posX] = 'T';
     }
+
+    return;
 }
 void moveLEFT() {
     //Only proceed if player is inside map and next move not land on 'X'
     if (posX > 0 && map[posY][posX-1] != 'X') {
         //Remove player from old location. 
-        map[posY][posX] = map_backup[posY][posX]; 
+        map[posY][posX] = map_overlap[posY][posX]; 
         //Move player position left 1 unit
         posX--;
         //Place player to new location. 
         map[posY][posX] = 'T';
     }
+
+    return;
 }
 void moveRIGHT() {
     //Only proceed if player is inside map and next move not land on 'X'
     if (posX < map[posY].size()-1 && map[posY][posX+1] != 'X') {
         //Remove player from old location. 
-        map[posY][posX] = map_backup[posY][posX]; 
+        map[posY][posX] = map_overlap[posY][posX]; 
         //Move player position right 1 unit
         posX++;
         //Place player to new location. 
         map[posY][posX] = 'T';
     }
+
+    return;
 }
 
 #endif
