@@ -63,7 +63,7 @@ void mainMenu() {
         signal(SIGINT, restoreSetting);
 
         //Assign control schemes from file
-        assignKeybind();
+        confirmKeybind();
 
         //Get terminal settings from stdin
         tcgetattr(STDIN_FILENO, &new_tio_);

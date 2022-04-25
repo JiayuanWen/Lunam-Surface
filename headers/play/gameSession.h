@@ -8,6 +8,8 @@
 #include <vector>
 #include <string>
 
+#include "../../headers/settings/customKeybind.h"
+
 // The following is for capturing player input without player needing to press 'Enter'
     //If system is 32-bit or 64-bit Windows, use conio.h.
 #ifdef _WIN32
@@ -46,10 +48,10 @@ int posY = 0;
 int energy = 100; //Player energy from 100 to 0
 
 //Controls;
-char UP = 'w';
-char DOWN = 's';
-char LEFT = 'a';
-char RIGHT = 'd';
+char UP;
+char DOWN;
+char LEFT;
+char RIGHT;
 
 //Function prototypes for avoiding "Not declared in scope" errors.
 void gameSession();
@@ -90,7 +92,6 @@ void preSection(std::vector<std::vector<char>> map_import) {
     //Find '^' in map, that is the starting point.
     for (int y = 0; y < map.size(); y++) {
         for (int x = 0; x < map[y].size(); x++) {
-            //std::cout << map[y][x]; //For Debug, checking if map is still intact.
             if (map[y][x] == '^') {
                 posX = x;
                 posY = y;
@@ -98,17 +99,7 @@ void preSection(std::vector<std::vector<char>> map_import) {
                 //map_overlap[y][x] = 'X';
             }
         }
-        //std::cout << "\n";
     }
-
-    /*
-    for (int y = 0; y < map.size(); y++) {
-        for (int x = 0; x < map[y].size(); x++) {
-            std::cout << map[y][x]; //For Debug, checking if player "T" is on map.
-        }
-        std::cout << "\n";
-    }
-    //*/
 
     //Start the game.
     gameSession();
@@ -118,6 +109,12 @@ void preSection(std::vector<std::vector<char>> map_import) {
 
 //
 void gameSession() {
+    //Load control schemes from setting
+    UP = loadKeybind("up");
+    DOWN = loadKeybind("down");
+    LEFT = loadKeybind("left");
+    RIGHT = loadKeybind("right");
+
     // If system is Linux
     #ifdef __linux__
         //Variables

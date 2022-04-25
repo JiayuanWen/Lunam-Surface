@@ -30,7 +30,7 @@ bool continue_;
 //Function prototypes for avoiding "Not declared in scope" errors.
 void changeSetting(char setting);
 
-void assignKeybind() {
+void confirmKeybind() {
     //Variables
     std::ifstream keybind;
     std::string line;
@@ -56,6 +56,22 @@ void assignKeybind() {
     tolower(right);
 
     return;
+}
+
+char loadKeybind(std::string control) {
+    if (control == "up") {
+        return tolower(up);
+    }
+    else if (control == "down") {
+        return tolower(down);
+    }
+    else if (control == "left") {
+        return tolower(left);
+    }
+    else if (control == "right") {
+        return tolower(right);
+    }
+    return NULL;
 }
 
 void changeKeybind() {
@@ -145,70 +161,70 @@ void changeKeybind() {
 }
 
 void changeSetting(char setting) {
-                std::cout << "\nChange the setting to: ";
-                std::cin >> input;
+    std::cout << "\nChange the setting to: ";
+    std::cin >> input;
 
-                //Reset file read
-                keybind.close();
-                keybind.open(settingLoc);
+    //Reset file read
+    keybind.close();
+    keybind.open(settingLoc);
 
-                //Check if input is in use
-                for(int i=0; !keybind.eof(); i++) {
-                    c = keybind.get();
-                    if(toupper(input[0]) == c) {
-                        std::cout << "\n\nKey is already in-use, try another key. \n(Press 'Enter' to continue)";
-                        std::cin.get();
-                        std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+    //Check if input is in use
+    for(int i=0; !keybind.eof(); i++) {
+        c = keybind.get();
+        if(toupper(input[0]) == c) {
+            std::cout << "\n\nKey is already in-use, try another key. \n(Press 'Enter' to continue)";
+            std::cin.get();
+            std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
 
-                        continue_ = false;
-                        break;
-                    }
-                    continue_ = true;
-                }
+            continue_ = false;
+            break;
+        }
+        continue_ = true;
+    }
                 
 
-                if (continue_ == true) {
-                    //Reset file read
-                    keybind.close();
-                    keybind.open(settingLoc);
+    if (continue_ == true) {
+        //Reset file read
+        keybind.close();
+        keybind.open(settingLoc);
 
-                    //Copy settings file with new changes to temp string
-                    temp = "";
-                    for(int i=0; !keybind.eof(); i++) {
-                        c = keybind.get();
-                        if(c == toupper(setting)) {
-                            c = toupper(input[0]);
-                        }
-                        temp += c;
-                    }
-                    temp.erase(temp.end()-1); //Erase invalid character at the end   
+        //Copy settings file with new changes to temp string
+        temp = "";
+        for(int i=0; !keybind.eof(); i++) {
+            c = keybind.get();
+            if(c == toupper(setting)) {
+                c = toupper(input[0]);
+            }
+            temp += c;
+        }
+        temp.erase(temp.end()-1); //Erase invalid character at the end   
 
-                    //Copy temp string to temp settings file
-                    keybind_2 << temp;
-                    keybind_2.close();
-                    keybind.close();
+        //Copy temp string to temp settings file
+        keybind_2 << temp;
+        keybind_2.close();
+        keybind.close();
 
-                    //Copy temp settings file to temp string
-                    keybind.open(settingLoc_temp);
-                    temp = "";
-                    for(int i=0; !keybind.eof(); i++) {
-                        c = keybind.get();
-                        if(c == toupper(setting)) {
-                            c = toupper(input[0]);
-                        }
-                        temp += c;
-                    }
-                    temp.erase(temp.end()-1); //Erase invalid character at the end   
-                    keybind.close();
+        //Copy temp settings file to temp string
+        keybind.open(settingLoc_temp);
+        temp = "";
+        for(int i=0; !keybind.eof(); i++) {
+            c = keybind.get();
+            if(c == toupper(setting)) {
+                c = toupper(input[0]);
+            }
+            temp += c;
+        }
+        temp.erase(temp.end()-1); //Erase invalid character at the end   
+        keybind.close();
 
-                    //Copy temp string to settings file
-                    keybind_2.open(settingLoc);
-                    keybind_2 << temp;
-                    keybind_2.close();
+        //Copy temp string to settings file
+        keybind_2.open(settingLoc);
+        keybind_2 << temp;
+        keybind_2.close();
 
-                    //Assign new changes to game.
-                    assignKeybind();
-                }
+        //Assign new changes to game.
+        confirmKeybind();
+    }
 }
 
 #endif
