@@ -47,7 +47,7 @@ int posX = 0;
 int posY = 0; 
 int energy = 100; //Player energy from 100 to 0
 
-//Controls;
+//Controls
 char UP;
 char DOWN;
 char LEFT;
@@ -156,22 +156,18 @@ void gameSession() {
             input = getchar();
 
             //Process input
-            switch (input) {
-                case 'w':
-                    moveUP();
-                    break;
-                case 's':
-                    moveDOWN();
-                    break;
-                case 'a':
-                    moveLEFT();
-                    break;
-                case 'd':
-                    moveRIGHT();
-                    break;
-                default:
-                    break;
+            if (input == UP) {
+                moveUP();
             }
+            if (input == DOWN) {
+                moveDOWN();
+            }
+            if (input == LEFT) {
+                moveLEFT();
+            }
+            if (input == RIGHT) {
+                moveRIGHT();
+            } //Want to use switch, apparent that only works with const variables. 
 
             //Player reached base?
             switch (map_overlap[posY][posX]) {

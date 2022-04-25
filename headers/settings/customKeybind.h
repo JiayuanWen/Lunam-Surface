@@ -1,6 +1,8 @@
 //This is where players change control schemes
 //This is where the game loads control schemes
 
+//Probably the most painful header I worked on. Good luck to those who want to modify this...
+
 #ifndef CUSTOMKEYBIND_H
 #define CUSTOMKEYBIND_H
 
@@ -156,6 +158,8 @@ void changeKeybind() {
     keybind.close();
     keybind_2.close();
     remove(settingLoc_temp.c_str());
+
+    confirmKeybind();
 
     return;
 }
