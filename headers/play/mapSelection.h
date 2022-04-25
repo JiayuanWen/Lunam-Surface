@@ -114,17 +114,13 @@ void mapSelect() {
     dir = opendir(directory.c_str());
 
     if (dir == NULL) {
-        std::cout << "No maps found." << std::endl;
+        std::cout << "No maps found. \n";
         return;
     }
 
     //List map files in 'maps' folder
-    std::cout << "<Map Selection> " << std::endl;
-    std::cout << std::endl << std::endl;
-    std::cout << "Map List: " << std::endl;
-
-        //Credit: https://stackoverflow.com/questions/306533/how-do-i-get-a-list-of-files-in-a-directory-in-c
-        //Answer by Thomas Bonini
+    std::cout << "<Map Selection> \n \n \n";
+    std::cout << "Map List: \n";
     while ((entry = readdir(dir)) != NULL) {
         mapName = entry->d_name;
         const std::string mapPath = "maps/" + mapName;
@@ -153,12 +149,12 @@ void mapSelect() {
     //Player choose a map file
     int playerChoice = 0;
 
-    std::cout << std::endl << "Select map (Enter the map number, then press 'Enter'): ";
+    std::cout <<"\nSelect map (Enter the map number, then press 'Enter'): ";
     std::cin >> playerChoice;
 
     //Opening map file base on player choice
     if (playerChoice > mapCount-1 || playerChoice < 1) { // mapCount is +1 over the desired value, so mapCount-1
-        std::cout << "Map file does not exist." << std::endl << std::endl << std::endl;
+        std::cout << "Map file does not exist.\n \n \n";
         mapFile.close();
 
         std::cout << "(Press 'Enter' to go back to main menu)";
@@ -190,7 +186,7 @@ void mapSelect() {
             return;
         }
         else {
-            std::cout << "Map file not supported." << std::endl;
+            std::cout << "Map file not supported. \n";
             mapFile.close();
 
             std::cout << "(Press 'Enter' to go back to main menu)";

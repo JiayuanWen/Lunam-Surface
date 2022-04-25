@@ -1,0 +1,1 @@
+//Function prototypes for avoiding "Not declared in scope" errors.

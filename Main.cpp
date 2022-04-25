@@ -6,6 +6,7 @@
 #include "headers/play/mapSelection.h"
 #include "headers/instructions/instruction.h"
 #include "headers/settings/customKeybind.h"
+#include "headers/settings/customKeybind.h"
 
 
 // The following is for capturing player input without player needing to press 'Enter'
@@ -61,15 +62,19 @@ void mainMenu() {
         //Setting up interrupt signal handler
         signal(SIGINT, restoreSetting);
 
+        //Assign control schemes from file
+        assignKeybind();
+
+        //Get terminal settings from stdin
+        tcgetattr(STDIN_FILENO, &new_tio_);
+        //Get a copy of settings for restoration.
+        old_tio_ = new_tio_;
+
         while (session == true) {
 
             //If player back to main menu
             if (backToMenu == true) {
                 //Change terminal settings for real-time player input
-                    //Get terminal settings from stdin
-                tcgetattr(STDIN_FILENO, &new_tio_);
-                    //Get a copy of settings for restoration.
-                old_tio_ = new_tio_;
                     //Disable canonical mode (So players no longer need to press 'Enter' after input)
                 new_tio_.c_lflag &=(~ICANON & ~ECHO);
                     //Save and use new terminal settings. 
@@ -89,75 +94,74 @@ void mainMenu() {
             //std::cout << input << std::endl;
 
             //Main menu
-            std::cout << "    XXXXXXXXX~~~~~XXXXXXXXXXXX~~XXXXXXXXXXXXXXXX  " << std::endl;
-            std::cout << "        _____                                     " << std::endl;
-            std::cout << "       |     |_.--.--.-----.---.-.--------.       " << std::endl;
-            std::cout << "       |       |  |  |     |  _  |        |       " << std::endl;
-            std::cout << "       |_______|_____|__|__|___._|__|__|__|       " << std::endl;
-            std::cout << "    _______              ___                      " << std::endl;
-            std::cout << "    |     __|.--.--.----.'  _|.---.-.----.-----.  " << std::endl;
-            std::cout << "    |__     ||  |  |   _|   _||  _  |  __|  -__|  " << std::endl;
-            std::cout << "    |_______||_____|__| |__|  |___._|____|_____|  " << std::endl;
-            std::cout << "                                                  " << std::endl;
-            std::cout << "    XX~~~~~~~~XXXXXX~~XXXXXXXXXXXX~~~~~XXXXXXXXX  " << std::endl;
+                std::cout   << "    XXXXXXXXX~~~~~XXXXXXXXXXXX~~XXXXXXXXXXXXXXXX  \n"
+                            << "        _____                                     \n"
+                            << "       |     |_.--.--.-----.---.-.--------.       \n"
+                            << "       |       |  |  |     |  _  |        |       \n"
+                            << "       |_______|_____|__|__|___._|__|__|__|       \n"
+                            << "    _______              ___                      \n"
+                            << "    |     __|.--.--.----.'  _|.---.-.----.-----.  \n"
+                            << "    |__     ||  |  |   _|   _||  _  |  __|  -__|  \n"
+                            << "    |_______||_____|__| |__|  |___._|____|_____|  \n"
+                            << "                                                  \n"
+                            << "    XX~~~~~~~~XXXXXX~~XXXXXXXXXXXX~~~~~XXXXXXXXX  \n";
 
             if (option == 1) {
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                     > Start <                    " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                    Instruction                   " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                      Settings                    " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                        Quit                      " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "('W' and 'S' to Choose. 'L' to Select)";
+                std::cout   << "                                                  \n"
+                            << "                     > Start <                    \n"
+                            << "                                                  \n"
+                            << "                    Instruction                   \n"
+                            << "                                                  \n"
+                            << "                      Settings                    \n"
+                            << "                                                  \n"
+                            << "                        Quit                      \n"
+                            << "                                                  \n"
+                            << "                                                  \n"
+                            << "                                                  \n"
+                            << "('W' and 'S' to Choose. 'L' to Select)";
             }
             else if (option == 2) {
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                       Start                      " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                  > Instruction <                 " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                      Settings                    " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                        Quit                      " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "('W' and 'S' to Choose. 'L' to Select)";
+                std::cout   << "                                                  \n"
+                            << "                       Start                      \n"
+                            << "                                                  \n"
+                            << "                  > Instruction <                 \n"
+                            << "                                                  \n"
+                            << "                      Settings                    \n"
+                            << "                                                  \n"
+                            << "                        Quit                      \n"
+                            << "                                                  \n"
+                            << "                                                  \n"
+                            << "                                                  \n"
+                            << "('W' and 'S' to Choose. 'L' to Select)";
             }
             else if (option == 3) {
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                       Start                      " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                    Instruction                   " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                    > Settings <                  " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                        Quit                      " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "('W' and 'S' to Choose. 'L' to Select)";
+                std::cout   << "                                                  \n"
+                            << "                       Start                      \n"
+                            << "                                                  \n"
+                            << "                    Instruction                   \n"
+                            << "                                                  \n"
+                            << "                    > Settings <                  \n"
+                            << "                                                  \n"
+                            << "                        Quit                      \n"
+                            << "                                                  \n"
+                            << "                                                  \n"
+                            << "                                                  \n"
+                            << "('W' and 'S' to Choose. 'L' to Select)";
             }
             else if (option == 4) {
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                       Start                      " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                    Instruction                   " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                      Settings                    " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                      > Quit <                    " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "                                                  " << std::endl;
-                std::cout << "('W' and 'S' to Choose. 'L' to Select)";
+                std::cout   << "                                                  \n"
+                            << "                       Start                      \n"
+                            << "                                                  \n"
+                            << "                    Instruction                   \n"
+                            << "                                                  \n"
+                            << "                      Settings                    \n"
+                            << "                                                  \n"
+                            << "                      > Quit <                    \n"
+                            << "                                                  \n"
+                            << "                                                  \n"
+                            << "                                                  \n"
+                            << "('W' and 'S' to Choose. 'L' to Select)";
             }
-            
 
             //Get input
             input = getchar();
@@ -188,6 +192,7 @@ void mainMenu() {
                     }
                     else if (option == 3) { //Settings
                         tcsetattr(STDIN_FILENO,TCSANOW,&old_tio_); //Reset terminal setting
+                        changeKeybind();
                         backToMenu = true;
                     }
                     else if (option == 4) { //Quit

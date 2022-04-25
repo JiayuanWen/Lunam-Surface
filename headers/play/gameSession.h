@@ -142,7 +142,7 @@ void gameSession() {
             //Clear terminal screen for new frame
                 //"\033[2J:" clears terminal from top to bottom
                 //"\033[1;1H" place cursor back to top right corner, or the begining of terminal.
-            std::cout << "\033[2J\033[1;1H" << std::endl;
+            std::cout << "\033[2J\033[1;1H";
 
             //For debug. Check if system got user input.
             //std::cout << input << std::endl;
