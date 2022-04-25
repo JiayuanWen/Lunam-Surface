@@ -14,7 +14,7 @@ D - right
 
 
 ## Install tutorial 
-1. Download a zip from here. 
-2. Extract the folder in zip to a location of your choice. 
-3. Run "Lunam Surface" in folder. \
+1. Download a zip from [here](https://github.com/JiayuanWen/Lunam-Surface/releases). 
+2. Extract the "game" folder in zip to a location of your choice. 
+3. Run "Lunam Surface" in "game" folder. \
 <sub>(Optional) You can create a shortcut of "Lunam Surface" to your desktop</sub>
