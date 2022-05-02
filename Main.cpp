@@ -35,8 +35,16 @@
     }
 #endif
 
-//Function prototypes for avoiding "Not declared in scope" errors.
+//Function prototypes
 void mainMenu();
+
+//Menu rendering prototypes
+void gameTitle();
+void Start_Selected();
+void Instruction_Selected();
+void Settings_Selected();
+void Quit_Selected();
+
 
 //----------------Main driver----------------
 int main() {
@@ -92,73 +100,19 @@ void mainMenu() {
             //std::cout << input << std::endl;
 
             //Main menu
-                std::cout   << "    XXXXXXXXX~~~~~XXXXXXXXXXXX~~XXXXXXXXXXXXXXXX  \n"
-                            << "        _____                                     \n"
-                            << "       |     |_.--.--.-----.---.-.--------.       \n"
-                            << "       |       |  |  |     |  _  |        |       \n"
-                            << "       |_______|_____|__|__|___._|__|__|__|       \n"
-                            << "    _______              ___                      \n"
-                            << "    |     __|.--.--.----.'  _|.---.-.----.-----.  \n"
-                            << "    |__     ||  |  |   _|   _||  _  |  __|  -__|  \n"
-                            << "    |_______||_____|__| |__|  |___._|____|_____|  \n"
-                            << "                                                  \n"
-                            << "    XX~~~~~~~~XXXXXX~~XXXXXXXXXXXX~~~~~XXXXXXXXX  \n";
+            gameTitle();
 
             if (option == 1) {
-                std::cout   << "                                                  \n"
-                            << "                     > Start <                    \n"
-                            << "                                                  \n"
-                            << "                    Instruction                   \n"
-                            << "                                                  \n"
-                            << "                      Settings                    \n"
-                            << "                                                  \n"
-                            << "                        Quit                      \n"
-                            << "                                                  \n"
-                            << "                                                  \n"
-                            << "                                                  \n"
-                            << "('W' and 'S' to Choose. 'L' to Select)";
+                Start_Selected();
             }
             else if (option == 2) {
-                std::cout   << "                                                  \n"
-                            << "                       Start                      \n"
-                            << "                                                  \n"
-                            << "                  > Instruction <                 \n"
-                            << "                                                  \n"
-                            << "                      Settings                    \n"
-                            << "                                                  \n"
-                            << "                        Quit                      \n"
-                            << "                                                  \n"
-                            << "                                                  \n"
-                            << "                                                  \n"
-                            << "('W' and 'S' to Choose. 'L' to Select)";
+                Instruction_Selected();
             }
             else if (option == 3) {
-                std::cout   << "                                                  \n"
-                            << "                       Start                      \n"
-                            << "                                                  \n"
-                            << "                    Instruction                   \n"
-                            << "                                                  \n"
-                            << "                    > Settings <                  \n"
-                            << "                                                  \n"
-                            << "                        Quit                      \n"
-                            << "                                                  \n"
-                            << "                                                  \n"
-                            << "                                                  \n"
-                            << "('W' and 'S' to Choose. 'L' to Select)";
+                Settings_Selected();
             }
             else if (option == 4) {
-                std::cout   << "                                                  \n"
-                            << "                       Start                      \n"
-                            << "                                                  \n"
-                            << "                    Instruction                   \n"
-                            << "                                                  \n"
-                            << "                      Settings                    \n"
-                            << "                                                  \n"
-                            << "                      > Quit <                    \n"
-                            << "                                                  \n"
-                            << "                                                  \n"
-                            << "                                                  \n"
-                            << "('W' and 'S' to Choose. 'L' to Select)";
+                Quit_Selected();
             }
 
             //Get input
@@ -212,4 +166,78 @@ void mainMenu() {
     return;
 }
 
+void gameTitle() {
+    std::cout   << "    XXXXXXXXX~~~~~XXXXXXXXXXXX~~XXXXXXXXXXXXXXXX  \n"
+                << "        _____                                     \n"
+                << "       |     |_.--.--.-----.---.-.--------.       \n"
+                << "       |       |  |  |     |  _  |        |       \n"
+                << "       |_______|_____|__|__|___._|__|__|__|       \n"
+                << "    _______              ___                      \n"
+                << "    |     __|.--.--.----.'  _|.---.-.----.-----.  \n"
+                << "    |__     ||  |  |   _|   _||  _  |  __|  -__|  \n"
+                << "    |_______||_____|__| |__|  |___._|____|_____|  \n"
+                << "                                                  \n"
+                << "    XX~~~~~~~~XXXXXX~~XXXXXXXXXXXX~~~~~XXXXXXXXX  \n";
 
+    return;
+}
+void Start_Selected() {
+    std::cout   << "                                                  \n"
+                << "                     > Start <                    \n"
+                << "                                                  \n"
+                << "                    Instruction                   \n"
+                << "                                                  \n"
+                << "                      Settings                    \n"
+                << "                                                  \n"
+                << "                        Quit                      \n"
+                << "                                                  \n"
+                << "                                                  \n"
+                << "                                                  \n"
+                << "('W' and 'S' to Choose. 'L' to Select)";
+    return;
+}
+void Instruction_Selected() {
+    std::cout   << "                                                  \n"
+                << "                       Start                      \n"
+                << "                                                  \n"
+                << "                  > Instruction <                 \n"
+                << "                                                  \n"
+                << "                      Settings                    \n"
+                << "                                                  \n"
+                << "                        Quit                      \n"
+                << "                                                  \n"
+                << "                                                  \n"
+                << "                                                  \n"
+                << "('W' and 'S' to Choose. 'L' to Select)";
+    return;
+}
+void Settings_Selected() {
+    std::cout   << "                                                  \n"
+                << "                       Start                      \n"
+                << "                                                  \n"
+                << "                    Instruction                   \n"
+                << "                                                  \n"
+                << "                    > Settings <                  \n"
+                << "                                                  \n"
+                << "                        Quit                      \n"
+                << "                                                  \n"
+                << "                                                  \n"
+                << "                                                  \n"
+                << "('W' and 'S' to Choose. 'L' to Select)";
+    return;
+}
+void Quit_Selected() {
+    std::cout   << "                                                  \n"
+                << "                       Start                      \n"
+                << "                                                  \n"
+                << "                    Instruction                   \n"
+                << "                                                  \n"
+                << "                      Settings                    \n"
+                << "                                                  \n"
+                << "                      > Quit <                    \n"
+                << "                                                  \n"
+                << "                                                  \n"
+                << "                                                  \n"
+                << "('W' and 'S' to Choose. 'L' to Select)";
+    return;
+}
