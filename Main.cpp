@@ -6,8 +6,6 @@
 #include "headers/play/mapSelection.h"
 #include "headers/instructions/instruction.h"
 #include "headers/settings/customKeybind.h"
-#include "headers/settings/customKeybind.h"
-
 
 // The following is for capturing player input without player needing to press 'Enter'
     //If system is 32-bit or 64-bit Windows, use conio.h.
