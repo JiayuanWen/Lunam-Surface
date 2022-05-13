@@ -28,9 +28,10 @@
     static void restoreSetting(int signum)
     {
         (void)signum;
-        tcsetattr(STDIN_FILENO,TCSANOW,&old_tio_); std::cout << "Terminal settings reset." << std::endl;
 
+        tcsetattr(STDIN_FILENO,TCSANOW,&old_tio_); std::cout << "Terminal settings reset." << std::endl;
         std::cout << "(Signal:" << signum << ") Lunam Surface force closed." << std::endl;
+
         exit(-1);
     }
 #endif
