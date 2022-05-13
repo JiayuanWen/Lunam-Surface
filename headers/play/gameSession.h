@@ -1,4 +1,5 @@
 //Game session header. The game is rendered and played here. 
+//Header is not declared in separate .cpp to increase speed. 
 
 #ifndef GAMESESSION_H
 #define GAMESESSION_H
@@ -9,6 +10,8 @@
 #include <string>
 
 #include "../../headers/settings/customKeybind.h"
+#include "mapSelection.h"
+#include "mapConvert.h"
 
 // The following is for capturing player input without player needing to press 'Enter'
     //If system is 32-bit or 64-bit Windows, use conio.h.
@@ -54,6 +57,7 @@ char LEFT;
 char RIGHT;
 
 //Function prototypes for avoiding "Not declared in scope" errors.
+void preSession();
 void gameSession();
 void moveUP();
 void moveDOWN();
@@ -84,10 +88,17 @@ XXXXXX~XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 */
 
 //Import map from mapConvert.h , then place player at starting point.
-void preSection(std::vector<std::vector<char>> map_import) {
-    //Import map from mapConvert.h
-    map = map_import;
-    map_overlap = map_import;
+void preSession() {
+
+    //Player select a map
+    std::string mapName = mapSelect();
+    //End the session and return to main menu if map doesn't exist or failed to load.
+    if (mapName == ".") {
+        return;
+    }
+    //Convert map to 2D vector for the game.
+    map = mapToVector(mapName);
+    map_overlap = map;
 
     //Find '^' in map, that is the starting point.
     for (int y = 0; y < map.size(); y++) {
@@ -103,11 +114,10 @@ void preSection(std::vector<std::vector<char>> map_import) {
 
     //Start the game.
     gameSession();
-
     return;
 }
 
-//
+//Game session
 void gameSession() {
     //Load control schemes from setting
     UP = loadKeybind("up");
