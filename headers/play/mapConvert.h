@@ -1,4 +1,5 @@
 //For converting map file to usable 2D vector
+//Header is not declared in separate .cpp to increase speed. 
 
 #ifndef MAPCONVERT_H
 #define MAPCONVERT_H
@@ -7,11 +8,11 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include "gameSession.h"
 
-void mapToVector(std::ifstream& mapFile) {
+std::vector<std::vector<char>> mapToVector(std::string mapName) {
 
     //Variables 
+    std::ifstream mapFile(mapName);
     std::vector<std::vector<char>> map; //Contain rows of the map
     std::vector<char> row; //A row consist of chunks
     std::string tempChunk; //Tempory chunk, used for checking if the chunk is part of the map.
@@ -47,10 +48,7 @@ void mapToVector(std::ifstream& mapFile) {
     }
     //*/
 
-    //Pass 'map' to gameSession
-    preSection(map);
-
-    return;
+    return map;
 }
 
 #endif

@@ -1,4 +1,5 @@
 //This is where player select a map in 'maps' folder.
+//Header is not declared in separate .cpp to increase speed. 
 
 #ifndef MAPSELECTION_H
 #define MAPSELECTION_H
@@ -8,7 +9,6 @@
 #include <vector>
 #include <string>
 #include <limits>
-#include "mapConvert.h"
 
 //If system is 32-bit or 64-bit Windows, dirent.h not included, so use a local one. 
 //Credit: tronkko (GitHub). Usable under MIT License.
@@ -24,7 +24,7 @@
     #include <termios.h>
 #endif
 
-void mapSelect() {
+std::string mapSelect() {
 
     //If system is Windows
     #ifdef _WIN32
@@ -115,7 +115,7 @@ void mapSelect() {
 
     if (dir == NULL) {
         std::cout << "No maps found. \n";
-        return;
+        return ".";
     }
 
     //List map files in 'maps' folder
@@ -161,7 +161,7 @@ void mapSelect() {
         std::cin.get();
         std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
 
-        return;
+        return ".";
     }
     else {
         mapFile.open(mapList[playerChoice-1]);
@@ -179,11 +179,8 @@ void mapSelect() {
             }
             //*/
 
-            //Pass file path to mapToVector() in mapConvert.h to convert map file to usable vector
-            mapToVector(mapFile);
-
             mapFile.close();
-            return;
+            return (mapList[playerChoice-1]);
         }
         else {
             std::cout << "Map file not supported. \n";
@@ -193,12 +190,12 @@ void mapSelect() {
             std::cin.get();
             std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
 
-            return;
+            return ".";
         }
     }
     #endif
 
-    return;
+    return ".";
 }
 
 #endif
