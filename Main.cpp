@@ -3,7 +3,7 @@
 #include <chrono>
 #include <thread>
 
-#include "headers/play/mapSelection.h"
+#include "headers/play/gameSession.h"
 #include "headers/instructions/instruction.h"
 #include "headers/settings/customKeybind.h"
 
@@ -134,7 +134,7 @@ void mainMenu() {
                     if (option == 1) { //Start
                         tcsetattr(STDIN_FILENO,TCSANOW,&old_tio_); //Reset terminal setting
                         std::cout << "\033[2J\033[1;1H" << std::endl; //Clear screen
-                        mapSelect(); //Go to map selection
+                        preSession(); 
                         backToMenu = true;
                     }
                     else if (option == 2) { //Instructions
