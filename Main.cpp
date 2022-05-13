@@ -40,10 +40,10 @@ void mainMenu();
 
 //Menu rendering prototypes
 void gameTitle();
-void Start_Selected();
-void Instruction_Selected();
-void Settings_Selected();
-void Quit_Selected();
+void Start_Selected(int opt);
+void Instruction_Selected(int opt);
+void Settings_Selected(int opt);
+void Quit_Selected(int opt);
 
 
 //----------------Main driver----------------
@@ -102,18 +102,18 @@ void mainMenu() {
             //Main menu
             gameTitle();
 
-            if (option == 1) {
-                Start_Selected();
-            }
-            else if (option == 2) {
-                Instruction_Selected();
-            }
-            else if (option == 3) {
-                Settings_Selected();
-            }
-            else if (option == 4) {
-                Quit_Selected();
-            }
+            std::cout   << "                                                  \n";
+                                        Start_Selected(option);
+            std::cout   << "                                                  \n";
+                                        Instruction_Selected(option);
+            std::cout   << "                                                  \n";
+                                        Settings_Selected(option);
+            std::cout   << "                                                  \n";
+                                        Quit_Selected(option);
+            std::cout   << "                                                  \n"
+                        << "                                                  \n"
+                        << "                                                  \n"
+                        << "('W' and 'S' to Choose. 'L' to Select)";
 
             //Get input
             input = getchar();
@@ -181,63 +181,35 @@ void gameTitle() {
 
     return;
 }
-void Start_Selected() {
-    std::cout   << "                                                  \n"
-                << "                     > Start <                    \n"
-                << "                                                  \n"
-                << "                    Instruction                   \n"
-                << "                                                  \n"
-                << "                      Settings                    \n"
-                << "                                                  \n"
-                << "                        Quit                      \n"
-                << "                                                  \n"
-                << "                                                  \n"
-                << "                                                  \n"
-                << "('W' and 'S' to Choose. 'L' to Select)";
+void Start_Selected(int opt) {
+    if (opt == 1) {
+        std::cout   << "                     > Start <                    \n";
+        return;
+    }
+    std::cout       << "                       Start                      \n";
     return;
 }
-void Instruction_Selected() {
-    std::cout   << "                                                  \n"
-                << "                       Start                      \n"
-                << "                                                  \n"
-                << "                  > Instruction <                 \n"
-                << "                                                  \n"
-                << "                      Settings                    \n"
-                << "                                                  \n"
-                << "                        Quit                      \n"
-                << "                                                  \n"
-                << "                                                  \n"
-                << "                                                  \n"
-                << "('W' and 'S' to Choose. 'L' to Select)";
+void Instruction_Selected(int opt) {
+    if (opt == 2) {
+        std::cout   << "                  > Instruction <                 \n";
+        return;
+    }
+    std::cout       << "                    Instruction                   \n";
     return;
 }
-void Settings_Selected() {
-    std::cout   << "                                                  \n"
-                << "                       Start                      \n"
-                << "                                                  \n"
-                << "                    Instruction                   \n"
-                << "                                                  \n"
-                << "                    > Settings <                  \n"
-                << "                                                  \n"
-                << "                        Quit                      \n"
-                << "                                                  \n"
-                << "                                                  \n"
-                << "                                                  \n"
-                << "('W' and 'S' to Choose. 'L' to Select)";
+void Settings_Selected(int opt) {
+    if (opt == 3) {
+        std::cout   << "                    > Settings <                  \n";
+        return;
+    }
+    std::cout       << "                      Settings                    \n";
     return;
 }
-void Quit_Selected() {
-    std::cout   << "                                                  \n"
-                << "                       Start                      \n"
-                << "                                                  \n"
-                << "                    Instruction                   \n"
-                << "                                                  \n"
-                << "                      Settings                    \n"
-                << "                                                  \n"
-                << "                      > Quit <                    \n"
-                << "                                                  \n"
-                << "                                                  \n"
-                << "                                                  \n"
-                << "('W' and 'S' to Choose. 'L' to Select)";
+void Quit_Selected(int opt) {
+    if (opt == 4) {
+        std::cout   << "                      > Quit <                    \n";
+        return;
+    }
+    std::cout       << "                        Quit                      \n";
     return;
 }
