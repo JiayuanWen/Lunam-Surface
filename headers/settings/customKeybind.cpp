@@ -74,7 +74,7 @@ char loadKeybind(std::string control) {
     else if (control == "right") {
         return tolower(right);
     }
-    return NULL;
+    return '\0';
 }
 
 void changeKeybind() {
