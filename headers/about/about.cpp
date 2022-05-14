@@ -14,7 +14,7 @@ void displayAbout() {
 
     std::cout   << "Lunam Surface \n \n \n"
                 << "Designed, coded by Jiayuan Wen \n \n \n"
-                << "Version: 0.2.0 \n"
+                << "Version: 1.0.0 \n"
                 << "GitHub: https://github.com/JiayuanWen/Lunam-Surface\n \n \n \n";
     
     std::cout << "(Press 'Enter' to go back to main menu)";
