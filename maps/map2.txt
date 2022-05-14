@@ -1,0 +1,15 @@
+LSMap
+
+X!XXXXXXXXXXXXXXXXXXX
+X~X~X~~~~~~~~~~~~~~~X
+X~X~X~X~XXXXX~X~XXX~X
+X~X~X~X~~~X~~~X~X~~~X
+X~X~XXXXX~XXX~XXXXX~X
+X~X~~~~~~~X~X~X~~~~~X
+X~XXX~X~XXX~XXXXXXX~X
+X~~~~~X~~~~~X~X~~~~~X
+X~XXX~XXXXXXX~XXXXX~X
+X~~~X~~~~~~~~~X~X~~~X
+X~XXXXXXXXXXX~X~X~X~X
+X~~~~~X~~~~~~~~~X~X~X
+XXXXXXXXXXXXXXXXXXX^X
