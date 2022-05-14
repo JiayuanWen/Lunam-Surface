@@ -43,9 +43,10 @@ std::vector<std::vector<char>> map;
 std::vector<std::vector<char>> map_overlap;
 
 //Player
-int posX = 0; 
-int posY = 0; 
-int energy = 100; //Player energy from 100 to 0
+int posX; 
+int posY; 
+int moves;
+clock_t start_timer, end_timer;
 
 //Controls
 char UP;
@@ -78,7 +79,6 @@ XXXXXX~XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
 //Import map from mapConvert.h , then place player at starting point.
 void preSession() {
-
     //Player select a map
     std::string mapName = mapSelect();
     //End the session and return to main menu if map doesn't exist or failed to load.
@@ -88,6 +88,9 @@ void preSession() {
     //Convert map to 2D vector for the game.
     map = mapToVector(mapName);
     map_overlap = map;
+
+    //Reset player stats
+    moves = 0;
 
     //Find '^' in map, that is the starting point.
     for (int y = 0; y < map.size(); y++) {
@@ -133,8 +136,13 @@ void gameSession() {
             //Save and use new terminal settings. 
         tcsetattr(STDIN_FILENO, TCSANOW, &new_tio);
 
+        //Start timer
+        start_timer = clock();
+
         //Game session
         while (session == true) {
+            
+
             //Clear terminal screen for new frame
                 //"\033[2J:" clears terminal from top to bottom
                 //"\033[1;1H" place cursor back to top right corner, or the begining of terminal.
@@ -150,6 +158,7 @@ void gameSession() {
                 }
                 std::cout << "\n";
             }
+            std::cout << "\n" << "Moves: " << moves << "\n";
 
             //Get input
             input = getchar();
@@ -158,21 +167,25 @@ void gameSession() {
             if (input == UP) {
                 moveUP();
             }
-            if (input == DOWN) {
+            else if (input == DOWN) {
                 moveDOWN();
             }
-            if (input == LEFT) {
+            else if (input == LEFT) {
                 moveLEFT();
             }
-            if (input == RIGHT) {
+            else if (input == RIGHT) {
                 moveRIGHT();
-            } //Want to use switch, apparent that only works with const variables. 
+            }
 
             //Player reached base?
             switch (map_overlap[posY][posX]) {
                 case '!':
+                    //Stop timer
+                    end_timer = clock();
+                    //End game session
                     session = false;
                     return;
+
                 default:
                     break;
             }
@@ -197,6 +210,8 @@ void moveUP() {
         posY--;
         //Place player to new location. 
         map[posY][posX] = 'T';
+        //Add move counter
+        moves++;
     }
 
     return;
@@ -210,6 +225,8 @@ void moveDOWN() {
         posY++;
         //Place player to new location. 
         map[posY][posX] = 'T';
+        //Add move counter
+        moves++;
     }
 
     return;
@@ -223,6 +240,8 @@ void moveLEFT() {
         posX--;
         //Place player to new location. 
         map[posY][posX] = 'T';
+        //Add move counter
+        moves++;
     }
 
     return;
@@ -236,7 +255,10 @@ void moveRIGHT() {
         posX++;
         //Place player to new location. 
         map[posY][posX] = 'T';
+        //Add move counter
+        moves++;
     }
 
     return;
 }
+

@@ -5,7 +5,6 @@
 
 #include <vector>
 
-//Function prototypes for avoiding "Not declared in scope" errors.
 void preSession();
 void gameSession();
 void moveUP();
