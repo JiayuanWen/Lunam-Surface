@@ -55,7 +55,7 @@
         "javascript": "node",
         "java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
         "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
-        "cpp": "cd $dir && g++ $fileName $dir/headers/settings/customKeybind.cpp $dir/headers/instructions/instruction.cpp $dir/headers/play/gameSession.cpp $dir/headers/play/mapConvert.cpp $dir/headers/about/about.cpp $dir/headers/play/mapSelection.cpp -o LunamSurface && $dir/LunamSurface",
+        "cpp": "cd $dir && g++ $fileName ./headers/settings/customKeybind.cpp ./headers/instructions/instruction.cpp ./headers/play/gameSession.cpp ./headers/play/mapConvert.cpp ./headers/about/about.cpp ./headers/play/mapSelection.cpp -o LunamSurface ; ./LunamSurface",
         "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         "php": "php",
         "python": "python -u",

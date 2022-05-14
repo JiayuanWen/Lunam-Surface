@@ -90,6 +90,10 @@ void preSession() {
     //Convert map to 2D vector for the game.
     map = mapToVector(mapName);
     map_overlap = map;
+    //In case the conversion is unsuccessful or map file somehow missing, end session and return to main menu.
+    if (map.empty()) {
+        return;
+    }
 
     //Reset player stats
     moves = 0;
@@ -200,7 +204,68 @@ void gameSession() {
 
     //If system is Windows
     #ifdef _WIN32
+        //Variables
+        char input = 'n';
+        bool session = true;
 
+        //Start timer
+        start_timer = std::chrono::high_resolution_clock::now();
+
+        //Game session
+        while (session == true) {
+            
+            //Clear terminal screen for new frame
+            system("cls");
+
+            //For debug. Check if system got user input.
+            //std::cout << input << std::endl;
+
+            //Print frame
+            for (int y = 0; y < map.size(); y++) {
+                for (int x = 0; x < map[y].size(); x++) {
+                    std::cout << map[y][x]; 
+                }
+                std::cout << "\n";
+            }
+            std::cout << "\n" << "Moves: " << moves << "\n";
+
+            //Get input
+            input = _getch();
+
+            //Process input
+            if (input == UP) {
+                moveUP();
+            }
+            else if (input == DOWN) {
+                moveDOWN();
+            }
+            else if (input == LEFT) {
+                moveLEFT();
+            }
+            else if (input == RIGHT) {
+                moveRIGHT();
+            }
+
+            //Player reached base?
+            switch (map_overlap[posY][posX]) {
+                case '!':
+                    //Stop timer
+                    end_timer = std::chrono::high_resolution_clock::now();
+                    time_ = end_timer - start_timer;
+                    //Display Game Over screen w/ player stats
+                    gameOver();
+                    //Clear input buffer. This is to prevent the game from skipping the game over screen.
+                    while ((getchar()) != '\n');
+                    //Press any key to continue
+                    input = _getch();
+                    //End game session
+                    session = false;
+                    return;
+
+                default:
+                    break;
+            }
+        }
     #endif
 
     return;
@@ -269,10 +334,17 @@ void moveRIGHT() {
 }
 
 void gameOver() {
+
+    #ifdef __linux__
     //Clear terminal screen for new frame
         //"\033[2J:" clears terminal from top to bottom
         //"\033[1;1H" place cursor back to top right corner, or the begining of terminal.
     std::cout << "\033[2J\033[1;1H";
+    #endif
+    #ifdef _WIN32
+    //Clear terminal screen for new frame
+    system("cls");
+    #endif
 
     std::cout   << "    XX~~~~~~~~XXXXXX~~XXXXXXXXXXXX~~~~~XXXXXXXXX  \n"
                 << "               < You Reached The Base! >          \n"

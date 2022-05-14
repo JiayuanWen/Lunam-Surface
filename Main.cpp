@@ -171,6 +171,96 @@ void mainMenu() {
         }
     #endif
 
+    // If system is Windows
+    #ifdef _WIN32
+        //Variables
+        char input = 'n';
+        bool session = true;
+        bool backToMenu = true;
+        short int option = 1;
+
+        //Assign control schemes from file
+        confirmKeybind();
+
+        while (session == true) {
+
+            //If player back to main menu
+            if (backToMenu == true) {
+                //Player is currently in menu
+                backToMenu = false;
+            }
+
+            //Clear terminal screen for new frame
+            system("cls");
+
+            //For debug. Check if system got user input.
+            //std::cout << input << std::endl;
+
+            //Main menu
+            gameTitle();
+            std::cout   << "\n";
+            Start_Selected(option);
+            std::cout   << "\n";
+            Instruction_Selected(option);
+            std::cout   << "\n";
+            Settings_Selected(option);
+            std::cout   << "\n";
+            About_Selected(option);
+            std::cout   << "\n";
+            Quit_Selected(option);
+            std::cout   << "\n"
+            << "('W' and 'S' to Choose. 'L' to Select)";
+
+            //Get input
+            input = _getch();
+
+            //Process input
+            switch (input) {
+                case 'w':
+                    if (option != 1) {
+                        option--;
+                    }
+                    break;
+                case 's':
+                    if (option != 5) {
+                        option++;
+                    }
+                    break;
+                case 'l':
+                    if (option == 1) { //Start
+                        std::cout << "\033[2J\033[1;1H" << std::endl; //Clear screen
+                        preSession(); 
+                        backToMenu = true;
+                    }
+                    else if (option == 2) { //Instructions
+                        displayInstruction();
+                        backToMenu = true;
+                    }
+                    else if (option == 3) { //Settings
+                        changeKeybind();
+                        backToMenu = true;
+                        //Clear input buffer. This is to prevent the game from skipping over other options after Settings
+                        while ((getchar()) != '\n');
+                    }
+                    else if (option == 4) { //About
+                        displayAbout();
+                        backToMenu = true;
+                    }
+                    else if (option == 5) { //Quit
+                        std::cout << "\033[2J\033[1;1H" << std::endl; //Clear screen
+                        session = false;
+                        backToMenu = false;
+                    }
+                    else {
+                        std::cout << "\033[2J\033[1;1H" << std::endl; //Clear screen
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+    #endif
+
     return;
 }
 

@@ -20,6 +20,11 @@ std::vector<std::vector<char>> mapToVector(std::string mapName) {
     
     rowIndex=0;
 
+    //If map file somehow missing, return empty vector which will prompt gameSession to end right away.
+    if (!mapFile) {
+        return map;
+    }
+
     //Skip "LSMap" and empty line in file. Both were used for format checking in mapSelection.h 
     getline(mapFile, tempChunk);
     //getline(mapFile, tempChunk);

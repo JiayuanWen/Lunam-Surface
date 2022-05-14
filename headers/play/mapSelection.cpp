@@ -35,18 +35,22 @@ std::string mapSelect() {
     std::ifstream mapFile;
 
     if (dir == NULL) {
-        std::cout << "No maps found." << std::endl;
-        return;
+        std::cout << "No maps found. \n";
+
+        std::cout << "(Press 'Enter' to go back to main menu)";
+        std::cin.get();
+        std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+
+        return ".";
     }
 
     //List map files in 'maps' folder
-    std::cout << "<Map Selection> " << std::endl;
-    std::cout << std::endl << std::endl;
-    std::cout << "Map List: " << std::endl;
+    std::cout << "<Map Selection> \n\n\n";
+    std::cout << "Map List: \n";
     while ((entry = readdir(dir)) != NULL) {
         mapName = entry->d_name;
         if (mapCount > 0) { // A bug in dirent.h readdir that causes it to output two glitched file names, ignore those two names and start counting from the first real file name. 
-            std::cout << mapCount << ". " << mapName << std::endl;
+            std::cout << mapCount << ". " << mapName << "\n";
             mapList.push_back(mapName);
         }
         mapCount++;
@@ -56,14 +60,19 @@ std::string mapSelect() {
     //Player choose a map file
     int playerChoice = 0;
 
-    std::cout << std::endl << "Select map (Enter the mpa number, then press 'Enter'): " << std::endl;
+    std::cout << std::endl << "Select map (Enter the mpa number, then press 'Enter'): ";
     std::cin >> playerChoice;
 
     //Opening map file base on player choice
     if (playerChoice > mapCount-1 || playerChoice < 1) { // mapCount is +1 over the desired value, so mapCount-1
         std::cout << "Map file does not exist." << std::endl;
         mapFile.close();
-        return;
+
+        std::cout << "(Press 'Enter' to go back to main menu)";
+        std::cin.get();
+        std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+
+        return ".";
     }
     else {
         mapFile.open("maps/"+mapList[playerChoice-1]);
@@ -81,16 +90,18 @@ std::string mapSelect() {
             }
             //*/
 
-            //Pass file path to mapToVector() in mapConvert.h to convert map file to usable vector
-            mapToVector(mapFile);
-
             mapFile.close();
-            return;
+            return ("maps/"+mapList[playerChoice-1]);
         }
         else {
-            std::cout << "Map file not supported." << std::endl;
+            std::cout << "Map file not supported.\n";
             mapFile.close();
-            return;
+
+            std::cout << "(Press 'Enter' to go back to main menu)";
+            std::cin.get();
+            std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+
+            return ".";
         }
     }
     #endif
