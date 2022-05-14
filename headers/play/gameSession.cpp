@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <chrono>
 #include <string>
 
 #include "../../headers/settings/customKeybind.h"
@@ -46,7 +47,8 @@ std::vector<std::vector<char>> map_overlap;
 int posX; 
 int posY; 
 int moves;
-clock_t start_timer, end_timer;
+std::chrono::high_resolution_clock::time_point start_timer, end_timer;
+std::chrono::duration<double, std::milli> time_;
 
 //Controls
 char UP;
@@ -137,12 +139,11 @@ void gameSession() {
         tcsetattr(STDIN_FILENO, TCSANOW, &new_tio);
 
         //Start timer
-        start_timer = clock();
+        start_timer = std::chrono::high_resolution_clock::now();
 
         //Game session
         while (session == true) {
             
-
             //Clear terminal screen for new frame
                 //"\033[2J:" clears terminal from top to bottom
                 //"\033[1;1H" place cursor back to top right corner, or the begining of terminal.
@@ -181,7 +182,12 @@ void gameSession() {
             switch (map_overlap[posY][posX]) {
                 case '!':
                     //Stop timer
-                    end_timer = clock();
+                    end_timer = std::chrono::high_resolution_clock::now();
+                    time_ = end_timer - start_timer;
+                    //Display Game Over screen w/ player stats
+                    gameOver();
+                    //Press any key to continue
+                    input = getchar();
                     //End game session
                     session = false;
                     return;
@@ -262,3 +268,20 @@ void moveRIGHT() {
     return;
 }
 
+void gameOver() {
+    //Clear terminal screen for new frame
+        //"\033[2J:" clears terminal from top to bottom
+        //"\033[1;1H" place cursor back to top right corner, or the begining of terminal.
+    std::cout << "\033[2J\033[1;1H";
+
+    std::cout   << "    XX~~~~~~~~XXXXXX~~XXXXXXXXXXXX~~~~~XXXXXXXXX  \n"
+                << "               < You Reached The Base! >          \n"
+                << "    XXXXXXXXX~~~~~XXXXXXXXXXXX~~XXXXXXXXXXXXXXXX  \n"
+                << "\n\n"
+                << "              Moves: " << moves << "\n"
+                << "              Time: " << time_.count() * 0.001 << " seconds" << "\n"
+                << "\n\n\n"
+                << "(Press any key to go back to main menu)";
+
+    return;
+}

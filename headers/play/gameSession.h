@@ -11,5 +11,6 @@ void moveUP();
 void moveDOWN();
 void moveLEFT();
 void moveRIGHT();
+void gameOver();
 
 #endif
