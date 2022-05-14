@@ -8,6 +8,8 @@
 
 * Add '!' somewhere in your map, this will be the end point.
 
+* Due to default terminal size, it is adviced to keep your map height below 19 units and length below 73 units. 
+
 * No empty lines after your map.
 
 * After finishing your map, place it in the "maps" folder.
