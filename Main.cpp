@@ -103,17 +103,15 @@ void mainMenu() {
             //Main menu
             gameTitle();
 
-            std::cout   << "                                                  \n";
+            std::cout   << "\n";
                                         Start_Selected(option);
-            std::cout   << "                                                  \n";
+            std::cout   << "\n";
                                         Instruction_Selected(option);
-            std::cout   << "                                                  \n";
+            std::cout   << "\n";
                                         Settings_Selected(option);
-            std::cout   << "                                                  \n";
+            std::cout   << "\n";
                                         Quit_Selected(option);
-            std::cout   << "                                                  \n"
-                        << "                                                  \n"
-                        << "                                                  \n"
+            std::cout   << "\n\n\n"
                         << "('W' and 'S' to Choose. 'L' to Select)";
 
             //Get input
