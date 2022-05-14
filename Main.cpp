@@ -6,6 +6,7 @@
 #include "headers/play/gameSession.h"
 #include "headers/instructions/instruction.h"
 #include "headers/settings/customKeybind.h"
+#include "headers/about/about.h"
 
 // The following is for capturing player input without player needing to press 'Enter'
     //If system is 32-bit or 64-bit Windows, use conio.h.
@@ -44,6 +45,7 @@ void gameTitle();
 void Start_Selected(int opt);
 void Instruction_Selected(int opt);
 void Settings_Selected(int opt);
+void About_Selected(int opt);
 void Quit_Selected(int opt);
 
 
@@ -110,8 +112,10 @@ void mainMenu() {
             std::cout   << "\n";
                                         Settings_Selected(option);
             std::cout   << "\n";
+                                        About_Selected(option);
+            std::cout   << "\n";
                                         Quit_Selected(option);
-            std::cout   << "\n\n\n"
+            std::cout   << "\n"
                         << "('W' and 'S' to Choose. 'L' to Select)";
 
             //Get input
@@ -125,7 +129,7 @@ void mainMenu() {
                     }
                     break;
                 case 's':
-                    if (option != 4) {
+                    if (option != 5) {
                         option++;
                     }
                     break;
@@ -146,7 +150,12 @@ void mainMenu() {
                         changeKeybind();
                         backToMenu = true;
                     }
-                    else if (option == 4) { //Quit
+                    else if (option == 4) { //About
+                        tcsetattr(STDIN_FILENO,TCSANOW,&old_tio_); //Reset terminal setting
+                        displayAbout();
+                        backToMenu = true;
+                    }
+                    else if (option == 5) { //Quit
                         tcsetattr(STDIN_FILENO,TCSANOW,&old_tio_); //Reset terminal setting
                         std::cout << "\033[2J\033[1;1H" << std::endl; //Clear screen
                         session = false;
@@ -198,17 +207,25 @@ void Instruction_Selected(int opt) {
 }
 void Settings_Selected(int opt) {
     if (opt == 3) {
-        std::cout   << "                    > Settings <                  \n";
+        std::cout   << "                   > Settings <                  \n";
         return;
     }
-    std::cout       << "                      Settings                    \n";
+    std::cout       << "                     Settings                    \n";
+    return;
+}
+void About_Selected(int opt) {
+    if (opt == 4) {
+        std::cout   << "                     > About <                   \n";
+        return;
+    }
+    std::cout       << "                       About                     \n";
     return;
 }
 void Quit_Selected(int opt) {
-    if (opt == 4) {
-        std::cout   << "                      > Quit <                    \n";
+    if (opt == 5) {
+        std::cout   << "                     > Quit <                    \n";
         return;
     }
-    std::cout       << "                        Quit                      \n";
+    std::cout       << "                       Quit                      \n";
     return;
 }
