@@ -3,11 +3,14 @@ A simple maze game programmed in C++. \
 Players' goal is to navigate through rocky moon terrain and reach the base.
 <br/>
 <br/>
-<img src="https://i.postimg.cc/Nj1F4ySM/Capture11.png" width="40%"></img> \
-<br/>
-<img src="https://i.postimg.cc/t7GyZkXz/Capture22.png" width="40%"></img> \
-<br/>
+<a>
+  <img src="https://i.postimg.cc/Nj1F4ySM/Capture11.png" width="40%"></img>
+</a>
+<a>
+<img src="https://i.postimg.cc/t7GyZkXz/Capture22.png" width="40%"></img>
+</a>
 <img src="https://i.postimg.cc/6Qb87kFL/Capture33.png" width="40%"></img> \
+<br/>
 <br/>
 <img src="https://i.postimg.cc/25t5j4B0/Capture44.png" width="60%"></img> 
 
