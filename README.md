@@ -19,7 +19,7 @@ Players' goal is to navigate through rocky moon terrain and reach the base.
 
 <img src="https://github.com/JiayuanWen/Lunam-Surface/blob/master/preview/custommap.png" width="30%"></img> 
 
-* Customizable control - Players are able to change the control schemes in-game as well as through editing keyBindings under 'settings' folder.
+* Customizable control - Players are able to change the control schemes in-game.
 
 <img src="https://github.com/JiayuanWen/Lunam-Surface/blob/master/preview/settings.png" width="60%"></img> 
 
