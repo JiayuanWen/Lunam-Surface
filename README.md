@@ -15,11 +15,13 @@ Players' goal is to help the rover navigate through rocky moon terrain and reach
 
 
 ## Features
-* Player made maps - Players can create their own maps and put it in 'maps' folder to play.
+* #### Player made maps
+  Players can create their own maps and put it in 'maps' folder to play.
 
 <img src="https://github.com/JiayuanWen/Lunam-Surface/blob/master/preview/custommap.png" width="30%"></img> 
 
-* Customizable control - Players are able to change the control schemes in-game.
+* #### Customizable control
+  Players are able to change the control schemes in-game.
 
 <img src="https://github.com/JiayuanWen/Lunam-Surface/blob/master/preview/settings.png" width="60%"></img> 
 
