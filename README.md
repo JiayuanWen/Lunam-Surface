@@ -1,6 +1,6 @@
 # Lunam Surface
-A simple maze game programmed in C++. \
-Players' goal is to navigate through rocky moon terrain and reach the base.
+A CLI maze game programmed in C++. \
+Players' goal is to help the rover navigate through rocky moon terrain and reach the base.
 <br/>
 <br/>
 <a>
